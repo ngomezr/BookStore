@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    User Login
+{% endblock title %}
+
+{% block content %}
+<div class="container bg-white" style="width: 30%;margin-top: 150px; ">
+    <form action="" enctype="multipart/form-data" method="post" novalidate>
+        <div class="row bg-warning">
+            <div class="col" style="background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%);">
+                <h1 class="text-center">Login</h1>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-borderless bg-white">
+                <tr>
+                    <th>
+                        Username:
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="username" value=""/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Password:
+                    </td>
+                    <td>
+                        <input type="password" class="form-control" name="password" value=""/>
+        
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col text-center align-middle pb-4">
+                <button class="btn btn-info" type="submit">Submit</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col  align-middle pb-4 d-flex justify-content-start" style="padding-top: 10px; background-image: linear-gradient(to left top, #000000, #151414, #232121, #322f2f, #413d3d);" >
+                <div class="container" style="padding-top: 10px; padding-left: 150px;">
+                    <span class="text-white align-middle">New User?</span>
+                </div>
+                <div class="container" style="padding-top: 6.5px; padding-right: 120px;">
+                    <a  class="btn btn-primary  btn-sm align-middle" href="{% url 'register' %}"> Register Here </a>
+                    <input type="hidden" name="next" value="{{ next }}" />
+                </div>
+            </div>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+     Search
+{% endblock title %}
+
+{% block content %}
+{% if books %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div id="table1">
+                <span class="rounded-pill p-4 bg-white align-middle border-bottom"><u>Results </u></span>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="table-wrapper-scroll-y my-custom-scrollbar table-repsonsive mt-4">
+                <table class="table table-hover table-borderless bg-white">
+                    <thead class="thead-black">
+                        <th class="bg-dark text-white text-center">Book Name</th>
+                        <th class="bg-dark text-white text-center">Item</th>
+                        <th class="bg-dark text-white text-center">User</th>
+                        <th class="bg-dark text-white text-center">Price</th>
+                        <th class="bg-dark text-white text-center">Add to Cart</th>
+                        <th class="bg-dark text-white text-center">Delete</th>
+                    </thead>
+                    <tbody>
+                        {% for book in books %}
+                        <tr>
+                            <td class="text-center align-middle">
+                                <a class="btn text-black" href="book_detail/{{ book.id }}">
+                                    {{ book.name }}
+                                </a>
+                            </td>
+                            <td class="text-center align-middle">
+                                <img src="{% if book.picture %}
+                                            {% static book.pic_path %}
+                                    {% else %}
+                                            {% static 'logo.jpg' %}
+                                    {% endif %}" width="100" height="100" />
+                            </td>
+                            <td class="text-center align-middle">
+                                {{ book.username }}
+                            </td>
+                            <td class="text-center align-middle">
+                                {{ book.price }}
+                            </td>
+                            <td class="text-center align-middle">
+                                <button type="button" class="btn btn-warning"><a class="btn text-black"
+                                        href="add_to_cart/{{book.id}}"> Buy </a></button>
+                            </td>
+                            <td class="text-center align-middle">
+                                <button type="button" class="btn btn-danger"><a class="btn text-white"
+                                        href="book_delete/{{ book.id }}"> Remove </a></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container bg-white rounded" style="width: 40%; height: auto; margin-top: 230px; padding-bottom: 40px;  ">
+    <form action="{% url 'search' %}" enctype="multipart/form-data" method="get" novalidate>
+        <div class="row">
+            <div class="col">
+                <br><h1 class="text-center">Book Search</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex" style="padding-top: 1em;">
+                <input class="form-control" type="text" name="search" placeholder="Type in a Book Name"/><br>
+                <button class="btn btn-info" type="submit">Submit</button>
+            </div>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
+{% endif %}
+{% endblock content %}
+

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Postbook
+{% endblock title %}
+
+{% block content %}
+{% if submitted %}
+<div class="container bg-white text-center rounded-pill" style="width: 30%;margin-top: 300px;"">
+    <h1>Posted Book Successfully</h1>
+</div>
+{% else %}
+<div class="container bg-white" style="width: 30%;margin-top: 130px; ">
+    <form action="" enctype="multipart/form-data" method="post" novalidate>
+        <div class="row bg-warning">
+            <div class="col" style="background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%);">
+                <h1 class="text-center">Post a Book</h1>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                {{form.as_table}}
+            </table>
+        </div>
+        <div class="row">
+            <div class="col text-center align-middle pb-4">
+                <button class="btn btn-info" type="submit">Submit</button>
+            </div>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
+{% endif %}
+{% endblock content %}

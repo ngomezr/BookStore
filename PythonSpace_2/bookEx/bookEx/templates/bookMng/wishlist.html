@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    WishList
+{% endblock title %}
+
+
+{% block content %}
+<div class="container" style="padding-top:150px">
+    {% if submitted %}
+    <div class="container bg-white text-center rounded-pill pb-1" style="width: 80%;margin-top: 150px;"">
+        <h1 style="padding-top: 10px;">Click below to view current WishList items.</h1>
+        <p>
+             <a class="btn btn-info btn-sm" href="mywishlist"">WishList </a>
+        </p>
+    </div>
+    {% else %}
+    <div class="container bg-white" style="width: 50%;margin-top: 90px; ">
+        <form action="" enctype="multipart/form-data" method="post" novalidate>
+            <div class="row">
+                <div class="col" style="background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%);">
+                    <h1 class="text-center">Add to WishList</h1>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table">
+                    {{form.as_table}}
+                </table>
+            </div>
+            <div class="row">
+                <div class="col text-center align-middle pb-4">
+                    <button class="btn btn-info" type="submit">Add</button>
+                </div>
+            </div>
+            {% csrf_token %}
+        </form>
+    </div>
+    {% endif %}
+    {% endblock content %}
+</div>
+

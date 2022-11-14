@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Checkout
+{% endblock title %}
+
+
+{% block content %}
+{% if submitted %}
+<div class="container bg-white text-center rounded-pill" style="width: 30%;margin-top: 300px;"">
+    <h1>Purchased SuccessFully!</h1>
+</div>
+{% else %}
+<div class="container bg-white" style="width: 30%;margin-top: 90px; ">
+    <form action="" enctype="multipart/form-data" method="post" novalidate>
+        <div class="row">
+            <div class="col" style="background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%);">
+                <h1 class="text-center">Checkout</h1>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table bg-white">
+                <tr>
+                    <th class="text-center">
+                        Total Books Price
+                    </th>
+                    <td>
+                        ${{book_sum}}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-center">
+                        Tax
+                    </th>
+                    <td>
+                        ${{tax}}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-center">
+                        Total Tax
+                    </th>
+                    <td>
+                        ${{total_tax}}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-center">
+                        Total Sum
+                    </th>
+                    <td>
+                        ${{total_sum}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col text-center align-middle pb-4">
+                <button class="btn btn-info" type="submit">Purchase</button>
+            </div>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
+{% endif %}
+
+{% endblock content %}

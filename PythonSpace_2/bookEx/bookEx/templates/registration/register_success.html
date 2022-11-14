@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    User Registration Success
+{% endblock title %}
+
+{% block content %}
+<div class="container bg-white text-center rounded-pill pb-1" style="width: 30%;margin-top: 300px;"">
+    <h1 style="padding-top: 10px;">Registered SuccessFully!</h1>
+    <p>
+        To Login <a class="btn btn-info btn-sm" href="{% url 'login' %}?next=/"> Click Here </a>
+    </p>
+</div>
+{% endblock content %}

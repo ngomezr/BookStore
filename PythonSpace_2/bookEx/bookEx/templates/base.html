@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        {% block title %}
+            My Title
+        {% endblock title %}
+    </title>
+    <!-- The Boostrap Imports For This Project -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- The JavaScript Imports For The Functionality of the Website -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    
+         <!-- The CSS Imports -->
+    <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'calendar.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'display.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body class="d-flex flex-column">
+    <div class="background"></div>
+    <!-- NavBar -->
+    <header>
+        <nav class=" navbar navbar-expand-lg navbar-dark bg-dark">
+            <ion-icon name="flame-outline"></ion-icon>
+            <a href="/" class="navbar-brand ml-1">BookStore10Fold</a>
+            <!-- HamBurger Effect -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <!-- Produces the Items -->
+                <ul class="nav nav-pills nav-fill mr-auto">
+                    {% for item in item_list %}
+                    <li class="nav-item">
+                        <a class="nav-link btn-outline-info text-white" href="{{ item.link }}"> {{item.item}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <!-- User Login -->
+                <ul class="navbar-nav ">
+                    {% if user.is_authenticated %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-warning dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.username }}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">
+                                <a class="dropdown-item" href="{% url 'logout' %}?next=/">Logout</a>
+                            </button>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-warning dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Not Logged In
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">
+                                <a class="dropdown-item" href="{% url 'login' %}?next=/">Login</a>
+                            </button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Main -->
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <!-- Footer -->
+    <footer class="container-fluid bg-dark text-center fixed-bottom text-light py-2">
+           2021 Spring Django Python Base Web System
+    </footer>
+</body>
+</html>

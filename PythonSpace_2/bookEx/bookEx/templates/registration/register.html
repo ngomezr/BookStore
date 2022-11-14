@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    User Registration
+{% endblock title %}
+
+
+{% block content %}
+<div class="container bg-white" style="width: 30%;margin-top: 90px; ">
+    <form action="" enctype="multipart/form-data" method="post" novalidate>
+        <div class="row">
+            <div class="col" style="background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%);">
+                <h1 class="text-center">User Registration</h1>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                {{form.as_table}}
+            </table>
+        </div>
+        <div class="row">
+            <div class="col text-center align-middle pb-4">
+                <button class="btn btn-info" type="submit">Submit</button>
+            </div>
+        </div>
+        <input type="hidden" name="next" value="{{ next }}" />
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock content %}

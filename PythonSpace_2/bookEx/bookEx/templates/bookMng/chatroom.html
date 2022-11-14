@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+   Chatroom
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div id="table1">
+                <span class="rounded-pill p-4 bg-white align-middle border-bottom"><u> Chatroom </u></span>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="table-wrapper-scroll-y my-custom-scrollbar table-repsonsive mt-4">
+                <table class="table table-hover table-borderless bg-white">
+                    <thead class="thead-black">
+                        <th class="bg-dark text-white ">Anonymous Guest</th>
+                        <th class="bg-dark text-white ">Content</th>
+                        <th class="bg-dark text-white ">Posted On</th>
+                    </thead>
+                    <tbody>
+                        {% for chat in chat_list %}
+                        <tr>
+                            <td>
+                                {{ chat.username }} {{chat.test}} says:
+                            </td>
+                            <td>
+                                {{ chat.body }}
+                            </td>
+                            <td>
+                                {{ chat.publishdate }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-3 mt-2" style="padding-top: 150px;">
+            <form action="" enctype="multipart/form-data" method="post" novalidate>
+                <table class="table table-borderless bg-white">
+                    <tr>
+                        <td>
+                            {{ form.body }}  
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"colspan="2">
+                            <button class="btn btn-success" type="submit"> Comment </button>
+                        </td>
+                    </tr>
+                </table>
+                {% csrf_token %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
